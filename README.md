@@ -9,10 +9,10 @@
 * Initialize the repo with express-generator. ✅
 * Change the server port to 4000. ✅
 * Add the following code, after the line var app = express();, to app.js:
-  * var blogsRouter = require('./routes/blogs');
-  * app.use('/blogs', blogsRouter);
-* Create a new file ./routes/blogs.js.
-* Create a new express GET route "hello-blogs" in the ./routes/blogs.js file that sends the following as a response:
+  * var blogsRouter = require('./routes/blogs'); ✅
+  * app.use('/blogs', blogsRouter); ✅
+* Create a new file ./routes/blogs.js. ✅
+* Create a new express GET route "hello-blogs" in the ./routes/blogs.js file that sends the following as a response: ✅
   * res.json({message: "hello from express"})
 * Run npm start in ./ and navigate to "localhost:4000/blogs/hello-blogs" to see if the above works.
 
