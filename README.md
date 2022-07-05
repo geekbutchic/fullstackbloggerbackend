@@ -14,11 +14,11 @@
 * Create a new file ./routes/blogs.js. ✅
 * Create a new express GET route "hello-blogs" in the ./routes/blogs.js file that sends the following as a response: ✅
   * res.json({message: "hello from express"})
-* Run npm start in ./ and navigate to "localhost:4000/blogs/hello-blogs" to see if the above works.
+* Run npm start in ./ and navigate to "localhost:4000/blogs/hello-blogs" to see if the above works. ✅
 
 ### Requirements (Front-End Part 1)
-* Create a new github repo called fullstackbloggerfrontend, clone the repo to your computer and add the link to populi.
-* Initialize the repo with create-react-app.
+* Create a new github repo called fullstackbloggerfrontend, clone the repo to your computer and add the link to populi. ✅
+* Initialize the repo with create-react-app. ✅
 * Install react-router
 * Configure react-router by adding <BrowserRouter> to index.js.
 * Create a new folder ./src/Pages
