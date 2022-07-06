@@ -4,12 +4,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
+//npm i cors in express
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var blogsRouter = require("./routes/blogs");
 
 var app = express();
+var { mongoConnect } = require('./routes/mongo');
+mongoConnect();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -53,6 +53,76 @@
   } ✅
 * Run npm start in ./ and navigate to "localhost:3000/blogs" and if everything has been set up correctly, you should see the following on page:
   * Blogs Page
-    Server Message: hello from express.
+    Server Message: hello from express. ✅
 
+//==================================================================
 
+* In the fullstackbloggerbackend (Server) repo:
+  * Install mongodb and dotenv.
+    * npm i mongodb dotenv. ✅
+  * Create a new file ./.env. ✅
+  * Add your Mongo Atlas connection string to the .env file. 
+    * MONGO_URI=mongodb+srv://<myusername>:<mypassword>@<mycluster>.mongodb.net/?retryWrites=true&w=majority. ✅
+    * Note: NoSqlBooster will still have your URI stored in the connections window. Click Connect -> Select export to URI. ✅
+  * Create a new file ./mongo.js and add the following code to it:
+    * const { MongoClient } = require("mongodb");
+      require("dotenv").config();
+
+      let db;
+
+      async function mongoConnect() {
+        const uri = process.env.MONGO_URI;
+        const client = new MongoClient(uri);
+        try {
+          await client.connect();
+          db = await client.db(process.env.MONGO_DATABASE);
+          console.log("db connected");
+        } catch (error) {
+          console.error(error)
+        }
+      }
+      function blogsDB() {
+        return db;
+      }
+      module.exports = {
+        mongoConnect,
+        blogsDB,
+      }; ✅
+  * Add the following code, after the line var app = express();, to app.js:
+    * var { mongoConnect } = require('./mongo.js');
+      mongoConnect(); ✅
+  * Add a new GET route "all-blogs" in ./routes/blogs.js. 
+  * Implement the following functionality in the "all-blogs" route:
+    * It should respond with a list of all the blogs currently stored in your blogs database as a JSON object 
+      * res.send(allBlogs). ✅
+  
+* In the fullstackbloggerfrontend (Client) repo:
+  * Modify the useEffect method in the App component to be:
+    * useEffect(() => {
+      const fetchData = async () => {
+        const url = `${urlEndpoint}/blogs/all-blogs`
+        const apiResponse = await fetch(url);
+        const apiJSON = await apiResponse.json();
+        setServerJSON(apiJSON);
+        return;
+      };
+      fetchData();
+    }, []); 
+  * Modify the BlogsPage component to be:
+    * const BlogsPage = (props) => {
+      return (
+        <div className="blogs-page">
+          <h1>Blogs Page</h1>
+          <p>Server Message: {props.message.map((blog)=>{
+            return (
+              <>
+                {blog.title}
+              </>
+            )
+          })}</p>
+        </div>
+      )
+    }
+* Navigate to "localhost:3000/blogs"
+  * It should display the titles of all the blogs in your database to the page.
+* Stretch Goal: Display the other blog fields to the page along with title. Add css to improve the readability of the page.
