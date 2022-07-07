@@ -3,7 +3,6 @@ require("dotenv").config();
 
 let db;
 
-
 async function mongoConnect() {
   const uri = process.env.MONGO_URI;
   const client = new MongoClient(uri);
@@ -19,7 +18,6 @@ async function mongoConnect() {
 function blogsDB() {
   return db;
 }
-
 
 module.exports = {
   mongoConnect,
