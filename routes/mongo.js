@@ -12,7 +12,6 @@ async function mongoConnect() {
   try {
     await client.connect();
     db = await client.db(process.env.MONGO_DATABASE);
-    console.log(db);
     console.log("db connected");
   } catch (error) {
     console.error(error);

@@ -199,8 +199,8 @@
       * const sortField = req.query.sortField 
       * const sortOrder = req.query.sortOrder 
       * const filterField = req.query.filterField 
-      * const filterValue = req.query.filterValue
-    * Update the mongo query method to properly incorporate the above variables in the query.
+      * const filterValue = req.query.filterValue 
+    * Update the mongo query method to properly incorporate the above variables in the query ✅
       * const dbResult = await collection
         .find({[filterField]: filterValue})
         .sort({[sortField]: sortOrder})
@@ -208,7 +208,6 @@
         .skip(skip)
         .toArray();
       * Note: sortOrder may need to be converted from "ASC" and "DESC" to 1 and -1 respectively before the query is executed.
-
 
       * Note: The above code may have to be modified depending on your implementation of the "/blogs/all" route in the fullstack blogger project. But it should be very similar in functionality to the "/blogs/all" route in the ExpressJS example. 
 
