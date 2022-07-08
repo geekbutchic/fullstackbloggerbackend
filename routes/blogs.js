@@ -7,11 +7,16 @@ router.get("/hello-blogs", (req, res, next) => {
 });
 
 router.get("/all-blogs", async (req, res, next) => {
+  const limit = Number(req.query.limit);
+  const sortField = req.query.sortField;
+  const sortOrder = req.query.sortOrder;
+  const filterField = req.query.filterField;
+  const filterValue = req.query.filterValue;
+  
   try {
-    const collection = await blogsDB().collection("posts")
-    const allBlogs = await collection.find({}).toArray()
-    res.json(allBlogs)
-    
+    const collection = await blogsDB().collection("posts");
+    const allBlogs = await collection.find({}).toArray();
+    res.json(allBlogs);
   } catch (e) {
     console.log(e);
   }

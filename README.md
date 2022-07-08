@@ -168,7 +168,8 @@
       * Should be a number input field. ✅
 
 
-  * All input fields on the <BlogsPage /> should be hooked up to the state variables in <App />. 
+  * All input fields on the <BlogsPage /> should be hooked up to the state variables in <App />. ✅
+
   * Modify the useEffect method in the <App /> component to be:
     * useEffect(() => {
       const fetchData = async () => {
@@ -179,8 +180,9 @@
         return;
       };
       fetchData();
-    }, [sortField, sortOrder, filterField, filterValue, limit, page]);
-  * Note: The idea here is that the input fields on the <BlogsPage /> will update the state variables in <App />. Since the useEffect hook in <App /> is watching the state variables [sortField, sortOrder, filterField, filterValue, limit, page] for changes, every time the user inputs a new value into any <BlogsPage /> input field, the useEffect will trigger. The new fetch url will be calculated with the most up to date query params and will in turn refetch the new list of blogs from the server.
+    }, [sortField, sortOrder, filterField, filterValue, limit, page]); ✅
+
+  * Note: The idea here is that the input fields on the <BlogsPage /> will update the state variables in <App />. Since the useEffect hook in <App /> is watching the state variables [sortField, sortOrder, filterField, filterValue, limit, page] for changes, every time the user inputs a new value into any <BlogsPage /> input field, the useEffect will trigger. The new fetch url will be calculated with the most up to date query params and will in turn refetch the new list of blogs from the server. ✅
 
 * Implement the following in the Server
   * [Optional] Install nodemon on the server and add the custom dev command in the package.json
@@ -188,7 +190,8 @@
     * "scripts": {
       "start": "PORT=4000 node ./bin/www",
       "dev": "PORT=4000 nodemon ./bin/www"
-    }
+    } ✅
+    
   * In the "/blogs/all" route, implement the following:
     * Add the following variables inside the route handler function to get query param values from the incoming GET request url:
       * const limit = Number(req.query.limit)
@@ -205,8 +208,14 @@
         .skip(skip)
         .toArray();
       * Note: sortOrder may need to be converted from "ASC" and "DESC" to 1 and -1 respectively before the query is executed.
+
+
       * Note: The above code may have to be modified depending on your implementation of the "/blogs/all" route in the fullstack blogger project. But it should be very similar in functionality to the "/blogs/all" route in the ExpressJS example. 
+
+
     * Note: The sorting, filter, limit and page functionality are now being handled by the database using the mongodb query. We will no longer need to use JS functions to implement this functionality on the blogs dataset anymore.
+
+
     * Stretch Goal: Add server-side validation to the "/blogs/all" route to ensure the following before the mongo query is executed:
       * sortField, sortOrder, filterField and filterValue must have truthy values. I.E. they must not be null or an empty string.
       * limit and page must be integer values greater than 0.
