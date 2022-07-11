@@ -237,9 +237,9 @@
     * Add a mongo insert method to save the new blogPost object in the database.
   * Note: Use ExpressJS Example "/blog-submit" route as reference.✅
 
-* Implement the following in the Client
-  * Create a new page <PostBlogPage />
-  * Create a new route in <App /> "/post-blog" with the element as <PostBlogPage /> 
+* Implement the following in the Client 
+  * Create a new page <PostBlogPage /> .✅
+  * Create a new route in <App /> "/post-blog" with the element as <PostBlogPage /> .✅
   * Add the following function in <App />
     * const blogSubmit = async (blog) => {
         const url = `${urlEndpoint}/blogs/blog-submit`
@@ -251,22 +251,22 @@
           body: JSON.stringify(blog) 
         });
         const responseJSON = await response.json();
-      }
+      } ✅
   * Modify the "/blogs" route to be the index route of <App /> so that it shows by default at localhost:3000
-    * <Route index element={<BlogsPage message={serverJSON.message} blogSubmit={blogSubmit} />} />
+    * <Route index element={<BlogsPage message={serverJSON.message} />} />
   * Implement the following in <PostBlogPage />
     * Add three new state variables:
-      * title {string}
-      * author {string}
-      * text {string}
+      * title {string}  ✅
+      * author {string}  ✅
+      * text {string}  ✅
     * Add the following input fields:
-      * title 
+      * title ✅
         * Should be a text input field
-      * author 
+      * author ✅
         * Should be a text input field
-      * text 
-        * Should be a <textarea> field
-    * Hook up all input fields to their corresponding state variables
+      * text ✅
+        * Should be a <textarea> field ✅
+    * Hook up all input fields to their corresponding state variables.✅
     * Add a <button> called Submit
     * The Submit button should call props.blogSubmit(blogData) onClick and then programatically redirect to the home page.
       * const navigate = useNavigate()
