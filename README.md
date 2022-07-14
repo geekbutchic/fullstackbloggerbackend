@@ -267,11 +267,12 @@
       * text ✅
         * Should be a <textarea> field ✅
     * Hook up all input fields to their corresponding state variables.✅
-    * Add a <button> called Submit
-    * The Submit button should call props.blogSubmit(blogData) onClick and then programatically redirect to the home page.
+    * Add a <button> called Submit. ✅
+    * The Submit button should call props.blogSubmit(blogData) onClick and then programmatically redirect to the home page. ✅
       * const navigate = useNavigate()
-      * navigate(`/`)
-  * Note: blogData is going to be an object containing the current values of title, author, and text in the <PostBlogPage /> state. This data will be received by the server through the POST request, which will then in turn generate a new blog post with the added fields such as createdAt. The server will then save the new post using the mongo insert() method.
+      * navigate(`/`). ✅
+
+  * Note: blogData is going to be an object containing the current values of title, author, and text in the <PostBlogPage /> state. This data will be received by the server through the POST request, which will then in turn generate a new blog post with the added fields such as createdAt. The server will then save the new post using the mongo insert() method. ✅
 
 * Stretch Goal: Add a debounce in the Front-End to the text input fields
   * https://usehooks.com/useDebounce/
@@ -286,7 +287,65 @@ white_check_mark
 eyes
 raised_hands::skin-tone-3
 
-
+### Requirements (Fullstack Part 3.1 - Blog Post Manager - Server)
+* Implement the following Server-Side:
+  * Create a new route file ./routes/admin.js
+    * Add these lines to the top of the file:
+      * var express = require("express");
+        var router = express.Router();
+        const { blogsDB } = require("../mongo");
+    * Add this line to the bottom of the file:
+      * module.exports = router
+  * Add the new route to express in ./app.js
+    * var adminRouter = require('./routes/admin');
+    * app.use('/admin', adminRouter);
+  * Implement three new admin routes in ./routes/admin.js
+    * GET "/admin/blog-list"
+      * This route should respond with an array of blog posts, but only with the following fields: [id, title, author, createdAt, lastModified].
+        * res.json(adminBlogList)
+      * Hint: The mongodb method .project({}) can be chained onto a .find({}) to retrieve only the specified fields from the database.
+      * Note: The idea here is to leave out fields the administrator does not need to see, such as text, in order to reduce the amount of data sent between the client and the server.
+    * PUT "/admin/edit-blog"
+      * This route should receive a post body (req.body) with the following shape:
+        * req.body = {
+          blogId: {number},
+          title: {string},
+          author: {string},
+          text: {string}
+        }
+      * Implement mongodb functionality to find a post by blogId and then update that post in the database with the new values from req.body.
+        * try {
+            const collection = await blogsDB().collection("posts")
+            const updatedPost = {
+                ...newPostData // This is where the new data from req.body will go 
+            }
+            await collection.updateOne({
+                id: blogId
+            },{
+                $set:{
+                    ...updatedPost
+                }
+            })
+            res.json({success: true})
+        } catch (e) {
+            console.error(e)
+            res.json({success: false})
+        }
+      * Note: The field lastModified should be set to the current date when you update the blog post. 
+    * DELETE "/admin/delete-blog/:blogId"
+      * This route should get the blogId to delete from the req.params
+      * Implement mongodb functionality to find a blog post by blogId and delete it
+        * try {
+            const collection = await blogsDB().collection("posts")
+            await collection.deleteOne({
+                id: blogId
+            })    
+            res.json({success: true})
+        } catch (e) {
+            console.error(e)
+            res.json({success: false})
+        }
+  * Note: Eventually, we will be protecting certain functionality, such as editing or deleting a blog, by only allowing privileged admin users to access it. 
 
 
 
