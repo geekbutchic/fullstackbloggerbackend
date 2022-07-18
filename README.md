@@ -289,16 +289,16 @@ raised_hands::skin-tone-3
 
 ### Requirements (Fullstack Part 3.1 - Blog Post Manager - Server)
 * Implement the following Server-Side:
-  * Create a new route file ./routes/admin.js
+  * Create a new route file ./routes/admin.js. ✅
     * Add these lines to the top of the file:
       * var express = require("express");
         var router = express.Router();
-        const { blogsDB } = require("../mongo");
+        const { blogsDB } = require("../mongo"); ✅
     * Add this line to the bottom of the file:
       * module.exports = router
   * Add the new route to express in ./app.js
     * var adminRouter = require('./routes/admin');
-    * app.use('/admin', adminRouter);
+    * app.use('/admin', adminRouter); ✅
   * Implement three new admin routes in ./routes/admin.js
     * GET "/admin/blog-list"
       * This route should respond with an array of blog posts, but only with the following fields: [id, title, author, createdAt, lastModified].
